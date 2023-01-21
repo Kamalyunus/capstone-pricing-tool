@@ -1,0 +1,13 @@
+steps:
+# Build the container image for imdb review app
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/pricing-375400/price-tool-app', '.']
+# Push the container image to Container Registry
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/pricing-375400/price-tool-app']
+# Deploy container image to Cloud Run
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['run', 'deploy', 'price-tool-app', '--image', 'gcr.io/pricing-375400/price-tool-app', '--region', 'us-central1', '--platform', 'managed', '--cpu', '4','--memory', '4Gi', '--allow-unauthenticated', '--port','8501','--max-instances', '5']
+
+images:
+- gcr.io/pricing-375400/price-tool-app
