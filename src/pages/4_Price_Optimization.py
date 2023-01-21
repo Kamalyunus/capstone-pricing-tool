@@ -19,7 +19,7 @@ def investment(x,bp,bq):
 
 if st.session_state.key is not '':
 
-    st.title("Results")
+    st.title("Optimization Results")
 
     df = st.session_state['key']
 
@@ -63,15 +63,17 @@ if st.session_state.key is not '':
 
                 with panel1:
                     col1, col2, col3 = st.columns(3)
-                    col1.metric(label="Baseline Revenue", value=f"${round(baseline_revenue, 0)}")
-                    col2.metric(label="Optimize Revenue", value=f"${-round(best.fun, 0)}")
-                    col3.metric(label="Revenue Change", value=f"${-round(best.fun, 0) - round(baseline_revenue, 0)}", delta=f"{round(((-best.fun/baseline_revenue)-1)*100,1)}%")
+                    col1.metric(label="Baseline Revenue", value=f"${round(baseline_revenue)}")
+                    col2.metric(label="Optimize Revenue", value=f"${-round(best.fun)}")
+                    col3.metric(label="Revenue Change", value=f"${-round(best.fun) - round(baseline_revenue)}", delta=f"{round(((-best.fun/baseline_revenue)-1)*100,1)}%")
                 
                 with panel2:
                     col1, col2, col3 = st.columns(3)
-                    col1.metric(label="Baseline Qty", value=f"{round(baseline_qty, 0)}")
-                    col2.metric(label="Optimize Qty", value=f"{round(sum(new_qty), 0)}")
-                    col3.metric(label="% Qty Change", value = f"{round(sum(new_qty), 0) - round(baseline_qty, 0)}", delta=f"{round(((sum(new_qty)/baseline_qty)-1)*100,1)}%")
+                    col1.metric(label="Baseline Qty", value=f"{round(baseline_qty)}")
+                    col2.metric(label="Optimize Qty", value=f"{round(sum(new_qty))}")
+                    col3.metric(label="% Qty Change", value = f"{round(sum(new_qty)) - round(baseline_qty)}", delta=f"{round(((sum(new_qty)/baseline_qty)-1)*100,1)}%")
+
+                st.subheader(f"Budget Used: ${round(investment(best.x,bp,bq))}")
 
                 tab1, tab2 = st.tabs(["Item Price Change", "Optimal Item Price"])
 
