@@ -7,7 +7,7 @@ steps:
   args: ['push', 'gcr.io/pricing-375400/price-tool-app']
 # Deploy container image to Cloud Run
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['run', 'deploy', 'price-tool-app', '--image', 'gcr.io/pricing-375400/price-tool-app', '--region', 'us-central1', '--platform', 'managed', '--cpu', '4','--memory', '4Gi', '--allow-unauthenticated', '--port','8501','--max-instances', '5', '--service-account','pricing@pricing-375400.iam.gserviceaccount.com']
+  args: ['run', 'deploy', 'price-tool-app', '--image', 'gcr.io/pricing-375400/price-tool-app', '--region', 'us-central1', '--platform', 'managed', '--cpu', '4','--memory', '4Gi', '--allow-unauthenticated', '--port','8501','--max-instances', '5', '--service-account','41507175990@cloudbuild.gserviceaccount.com']
 
 images:
 - gcr.io/pricing-375400/price-tool-app
