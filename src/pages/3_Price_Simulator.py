@@ -21,12 +21,15 @@ if 'btn2' not in st.session_state:
     st.session_state['btn2'] = False
 
 if 'sim' not in st.session_state:
-    st.session_state.sim = []
+    st.session_state.sim = ''
+
+if 'user_p' not in st.session_state:
+    st.session_state.user_p = ''
 
 def callback1():
     st.session_state['btn2'] = True
 
-if st.session_state.df is not '':
+if st.session_state.df is not '' and st.session_state.elastic is not '' and st.session_state.forecast is not '':
 
     st.title("Simulation Results")  
 
@@ -38,12 +41,17 @@ if st.session_state.df is not '':
     bq = st.session_state.forecast.groupby("ITEM").tail(4).groupby("ITEM")["UNIT_FORECAST"].sum().to_numpy()
     num_items = e.size 
 
-    max_price = st.sidebar.slider("Price Reduction for All Items:",0,50,10, step=5, help = "Price Reduction per Item ", format="%d%%")
-    user_price = np.ones(num_items)*(max_price/100)
+    if st.session_state.user_p == '':
+        max_price = st.sidebar.slider("Price Reduction for All Items:",0,50,20, step=5, help = "Price Reduction per Item ", format="%d%%")
+    else:
+        max_price = st.sidebar.slider("Price Reduction for All Items:",0,50,st.session_state.user_p, step=5, help = "Price Reduction per Item ", format="%d%%")
+    
 
     if st.sidebar.button("Calculate", on_click=callback1):
         with st.spinner("Please Wait..."):
+            user_price = np.ones(num_items)*(max_price/100)
             st.session_state.sim = simulate(-user_price,e,bp,bq) 
+            st.session_state.user_p = max_price
             
     if st.session_state.btn2:
         panel1=st.container()
@@ -68,7 +76,7 @@ if st.session_state.df is not '':
             col2.metric(label="Simulated Qty", value=f"{round(new_qty)}")
             col3.metric(label="% Qty Change", value = f"{round(new_qty) - round(baseline_qty)}", delta=f"{round(((new_qty/baseline_qty)-1)*100,1)}%")
     
-        st.subheader(f"Investment Needed for {max_price}% Price Reduction: ${round(investment)}")
+        st.subheader(f"Investment Needed for {st.session_state.user_p}% Price Reduction: ${round(investment)}")
         
         st.subheader("Item Price Change")
 
@@ -81,5 +89,5 @@ if st.session_state.df is not '':
         st.altair_chart(chart2, theme="streamlit", use_container_width=True)
     
 else:
-    st.title(":orange[Upload a File under Home Tab!]")
+    st.title(":orange[Finish Previous Tabs!]")
 

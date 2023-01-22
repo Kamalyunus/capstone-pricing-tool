@@ -26,11 +26,21 @@ if 'btn3' not in st.session_state:
 if 'opt' not in st.session_state:
     st.session_state.opt = ''
 
+if 'opt_budget' not in st.session_state:
+     st.session_state.opt_budget = ''
+
+if 'slider_budget' not in st.session_state:
+     st.session_state.slider_budget = ''
+
+if 'opt_price_p' not in st.session_state:
+     st.session_state.opt_price_p = ''
+
+
 def callback1():
     st.session_state['btn3'] = True
 
 
-if st.session_state.df is not '':
+if st.session_state.df is not '' and st.session_state.elastic is not '' and st.session_state.forecast is not '':
 
     st.title("Optimization Results")
 
@@ -39,18 +49,26 @@ if st.session_state.df is not '':
     e = st.session_state.elastic['Elasticities'].to_numpy()
     bp = df.loc[df.groupby(["ITEM"])["DATE"].idxmax()].PRICE.to_numpy()   
     bq = st.session_state.forecast.groupby("ITEM").tail(4).groupby("ITEM")["UNIT_FORECAST"].sum().to_numpy()
+    st.session_state.slider_budget = round(int(np.dot(bp,bq)))
+    budget = round(int(np.dot(bp,bq)))
 
-    budget = np.dot(bp,bq)
 
-    max_budget=st.sidebar.slider("Budget:",0,round(int(budget),-3),round(int(0.3*budget),-2), step=50, help = "Max Budget Available for Price Investment",format="$%d")
+    if st.session_state.opt_budget == '':
+        max_budget=st.sidebar.slider("Budget:",0,budget,int(0.3*budget), step=10, help = "Max Budget Available for Price Investment",format="$%d")
+    else:
+        max_budget=st.sidebar.slider("Budget:",0,st.session_state.slider_budget,st.session_state.opt_budget, step=10, help = "Max Budget Available for Price Investment",format="$%d")
 
-    max_price=st.sidebar.slider("Maximum Price Reduction:",0,50,20, step=5, help = "Maximum Price Reduction Allowed per Item ", format="%d%%")
+    if st.session_state.opt_price_p == '':
+        max_price=st.sidebar.slider("Maximum Price Reduction:",0,50,20, step=5, help = "Maximum Price Reduction Allowed per Item ", format="%d%%")
+    else:
+        max_price=st.sidebar.slider("Maximum Price Reduction:",0,50,st.session_state.opt_price_p, step=5, help = "Maximum Price Reduction Allowed per Item ", format="%d%%")
 
     num_items = e.size # number of items
 
     if st.sidebar.button("Optimize", on_click=callback1):
         with st.spinner("Please Wait..."):
-
+            st.session_state.opt_price_p = max_price
+            st.session_state.opt_budget = max_budget
             #Solver
             st.session_state.opt = differential_evolution(
                     objective_func,
@@ -109,5 +127,5 @@ if st.session_state.df is not '':
             st.header(":red[No solution found to problem]")
 
 else:
-    st.title(":orange[Upload a File under Home Tab!]")
+    st.title(":orange[Finish Previous Tabs!]")
 
