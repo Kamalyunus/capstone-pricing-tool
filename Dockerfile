@@ -2,6 +2,8 @@ FROM python:3.9-slim
 
 RUN apt-get update && apt-get install -y build-essential
 
+RUN pip3 install cython numpy==1.23.3 pystan==2.19.1.1
+
 WORKDIR /
 EXPOSE 8501
 
