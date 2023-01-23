@@ -1,11 +1,12 @@
 import streamlit as st
 import pandas as pd
 from prophet import Prophet
+import altair as alt
 
 def forecast_demand(df):
     df_prophet = df.copy()
     df_prophet = df_prophet.rename(columns={'DATE': 'ds', 'UNITS': 'y'})
-    m = Prophet(weekly_seasonality=True)
+    m = Prophet()
     m.fit(df_prophet)
     future = m.make_future_dataframe(periods=4, freq='W')
     forecast = m.predict(future)
@@ -47,7 +48,17 @@ if st.session_state.df is not '':
 
     if st.session_state.btn:
         plot_item = st.selectbox("Select an Item to Plot:", st.session_state.forecast['ITEM'].unique())
-        st.line_chart(st.session_state.forecast[st.session_state.forecast['ITEM']==plot_item], x="DATE", y = ['UNIT_FORECAST'])
+        
+        chart1 = alt.Chart(st.session_state.df[st.session_state.df['ITEM']==plot_item]).mark_circle().encode(
+        x='DATE',
+        y='UNITS'
+        )
+
+        chart2 = alt.Chart(st.session_state.forecast[st.session_state.forecast['ITEM']==plot_item]).mark_line().encode(
+        x='DATE',
+        y='UNIT_FORECAST'
+        )
+        st.altair_chart(chart1+chart2, theme="streamlit", use_container_width=True)
         st.dataframe(st.session_state.forecast[st.session_state.forecast['ITEM']==plot_item], use_container_width=True)
 
 
