@@ -1,11 +1,7 @@
 altair==4.2.0
-numpy==1.23.3
-pystan==2.19.1.1
-pandas==1.5.3
-pandas_stubs==1.2.0.39
+numpy==1.21.5
+pandas==1.4.2
+prophet==1.1.2
 scikit_learn==1.2.0
-scipy==1.9.1
+scipy==1.7.3
 streamlit==1.17.0
-fbprophet==0.7.1
-
-

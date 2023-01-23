@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from fbprophet import Prophet
+from prophet import Prophet
 
 def forecast_demand(df):
     df_prophet = df.copy()

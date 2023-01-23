@@ -85,7 +85,7 @@ if st.session_state.df is not '' and st.session_state.elastic is not '' and st.s
                 alt.Y('variable:N', axis=alt.Axis(title='')),
                 alt.X('value:Q', axis=alt.Axis(title='price', grid=False, format='$.2f')),
                 color=alt.Color('variable:N'),
-                row='Item:O').configure_view(stroke='transparent')
+                row=alt.Row('Item:O', header = alt.Header(labelAngle=0, labelAlign='left'))).configure_view(stroke='transparent')
         st.altair_chart(chart2, theme="streamlit", use_container_width=True)
     
 else:
