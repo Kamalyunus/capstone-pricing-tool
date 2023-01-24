@@ -52,7 +52,7 @@ if st.session_state.df is not '':
         st.dataframe(st.session_state.elastic)
         chart1 = alt.Chart(st.session_state.df[st.session_state.df['ITEM']==plot_item]).mark_circle().encode(
         x=alt.X('PRICE', scale=alt.Scale(domain=[st.session_state.df[st.session_state.df['ITEM']==plot_item].PRICE.min()-0.05, st.session_state.df[st.session_state.df['ITEM']==plot_item].PRICE.max()+0.05])),
-        y='UNITS'
+        y=alt.Y('UNITS', title = '')
         )
         
         intercept = st.session_state.elastic[st.session_state.elastic['ITEM']==plot_item].Intercept
@@ -61,9 +61,11 @@ if st.session_state.df is not '':
         source=st.session_state.df[st.session_state.df['ITEM']==plot_item]
         source['CURVE'] = source['PRICE'].apply(lambda x: m.exp(intercept) * m.pow(x,beta))
         
-        chart2 = alt.Chart(source).mark_line().encode(
-        x=alt.X('PRICE', scale=alt.Scale(domain=[source.PRICE.min()-0.05, source.PRICE.max()+0.05])),
-        y='CURVE'
+        title = alt.TitleParams(f"PRICE ELASTICITY: {plot_item}", anchor='middle', subtitle='Orange: Estimated Price Elasticity')
+        chart2 = alt.Chart(source, title = title).mark_line().encode(
+        x=alt.X('PRICE', scale=alt.Scale(domain=[source.PRICE.min()-0.05, source.PRICE.max()+0.05]),axis=alt.Axis(title='PRICE', grid=False, format='$.2f')),
+        y=alt.Y('CURVE', title = 'UNITS'),
+        color=alt.value("#f35b04")
         )
         st.altair_chart(chart1+chart2, theme="streamlit", use_container_width=True)
 

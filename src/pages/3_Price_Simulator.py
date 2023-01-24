@@ -78,7 +78,7 @@ if st.session_state.df is not '' and st.session_state.elastic is not '' and st.s
     
         st.subheader(f"Investment Needed for {st.session_state.user_p}% Price Reduction: ${round(investment)}")
         
-        st.subheader("Item Price Change")
+        st.markdown("#### Item Price Change")
 
         chart_data_2 = pd.DataFrame({'Item':st.session_state.elastic['ITEM'], 'Base Price':np.around(bp,2),'New Price':np.around(new_price,2)})
         chart2 = alt.Chart(chart_data_2.melt('Item')).mark_bar().encode(

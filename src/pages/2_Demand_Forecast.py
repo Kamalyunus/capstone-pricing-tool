@@ -48,15 +48,17 @@ if st.session_state.df is not '':
 
     if st.session_state.btn:
         plot_item = st.selectbox("Select an Item to Plot:", st.session_state.forecast['ITEM'].unique())
-        
-        chart1 = alt.Chart(st.session_state.df[st.session_state.df['ITEM']==plot_item]).mark_circle().encode(
+        title = alt.TitleParams(f"DEMAND FORECAST: {plot_item}", anchor='middle', subtitle='Orange: Forecast     Blue: Actual')
+
+        chart1 = alt.Chart(st.session_state.df[st.session_state.df['ITEM']==plot_item], title=title).mark_circle().encode(
         x='DATE',
-        y='UNITS'
+        y=alt.Y('UNITS', title = '')
         )
 
         chart2 = alt.Chart(st.session_state.forecast[st.session_state.forecast['ITEM']==plot_item]).mark_line().encode(
         x='DATE',
-        y='UNIT_FORECAST'
+        y=alt.Y('UNIT_FORECAST', title = "UNITS"),
+        color=alt.value("#f35b04")
         )
         st.altair_chart(chart1+chart2, theme="streamlit", use_container_width=True)
         st.dataframe(st.session_state.forecast[st.session_state.forecast['ITEM']==plot_item], use_container_width=True)
