@@ -62,6 +62,8 @@ if st.session_state.df is not '':
         )
         st.altair_chart(chart1+chart2, theme="streamlit", use_container_width=True)
         st.dataframe(st.session_state.forecast[st.session_state.forecast['ITEM']==plot_item], use_container_width=True)
+        st.download_button(label="Download Forecast",data=st.session_state.forecast.to_csv(index=False).encode('utf-8'),file_name='demand_forecast.csv',mime='text/csv',)
+
 
 
 else:

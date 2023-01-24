@@ -49,7 +49,6 @@ if st.session_state.df is not '':
 
     if st.session_state.btn1:
         plot_item = st.selectbox("Select an Item to Plot Elasticities:", st.session_state.elastic['ITEM'].unique())
-        st.dataframe(st.session_state.elastic)
         chart1 = alt.Chart(st.session_state.df[st.session_state.df['ITEM']==plot_item]).mark_circle().encode(
         x=alt.X('PRICE', scale=alt.Scale(domain=[st.session_state.df[st.session_state.df['ITEM']==plot_item].PRICE.min()-0.05, st.session_state.df[st.session_state.df['ITEM']==plot_item].PRICE.max()+0.05])),
         y=alt.Y('UNITS', title = '')
@@ -68,6 +67,8 @@ if st.session_state.df is not '':
         color=alt.value("#f35b04")
         )
         st.altair_chart(chart1+chart2, theme="streamlit", use_container_width=True)
+        st.dataframe(st.session_state.elastic[['ITEM','Elasticities']])
+        st.download_button(label="Download Elasticities",data=st.session_state.elastic[['ITEM','Elasticities']].to_csv(index=False).encode('utf-8'),file_name='price_elasticities.csv',mime='text/csv',)
 
 else:
     st.title(":orange[Upload a File under Home Tab!]")
