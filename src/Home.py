@@ -15,7 +15,7 @@ st.set_page_config(
     page_icon=":moneybag:",
     layout="wide",
     menu_items={
-        'About': "# MSDS 498: CAPSTONE"
+        'About': "# MSDS 498 CAPSTONE PROJECT: Pricing Optimization "
     }
 )
 
