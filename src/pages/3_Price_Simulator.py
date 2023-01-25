@@ -87,6 +87,7 @@ if st.session_state.df is not '' and st.session_state.elastic is not '' and st.s
                 color=alt.Color('variable:N'),
                 row=alt.Row('Item:O', header = alt.Header(labelAngle=0, labelAlign='left'))).configure_view(stroke='transparent')
         st.altair_chart(chart2, theme="streamlit", use_container_width=True)
+        st.download_button(label="Download",data=chart_data_2.to_csv(index=False).encode('utf-8'),file_name='scenario_price_change.csv',mime='text/csv',)
     
 else:
     st.title(":orange[Finish Previous Tabs!]")
