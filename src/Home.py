@@ -9,6 +9,16 @@ def get_data(file):
     df = pd.read_csv(file)
     return df
     
+
+st.set_page_config(
+    page_title="Price Optimization App",
+    page_icon=":moneybag:",
+    layout="wide",
+    menu_items={
+        'About': "# MSDS 498: CAPSTONE"
+    }
+)
+
 st.title("Price Optimization App")
 st.caption("App is designed to provide optimal pricing strategy for a given budget" )
 st.markdown("### Getting Started:")
