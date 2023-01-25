@@ -15,13 +15,18 @@ def forecast_demand(df):
 @st.experimental_memo
 def Prophet_Model_loop(df):
     all_demand=pd.DataFrame()
+    progress = 0
+    my_bar = st.progress(progress)
     for i in df['ITEM'].unique():
+        my_bar.progress(progress/df['ITEM'].nunique())
         temp = df[df['ITEM']==i]
         demand = forecast_demand(temp)
         demand['ITEM'] = i
         demand = demand[['ITEM','ds','yhat']]
         demand = demand.rename(columns={'ds': 'DATE', 'yhat':'UNIT_FORECAST'})
         all_demand=pd.concat([all_demand, demand])
+        progress = progress + 1
+    my_bar.empty()
     return all_demand
 
 if 'forecast' not in st.session_state:

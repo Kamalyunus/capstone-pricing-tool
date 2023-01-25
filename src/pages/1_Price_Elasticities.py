@@ -18,12 +18,17 @@ def get_elasticities(df):
 @st.experimental_memo
 def Elasticities_Model_loop(df):
     all_elastic=pd.DataFrame()
+    progress = 0
+    my_bar = st.progress(progress)
     for i in df['ITEM'].unique():
+        my_bar.progress(progress/df['ITEM'].nunique())
         temp = df[df['ITEM']==i]
         temp['log_p'] = temp.PRICE.apply(lambda x : m.log(x))
         temp['log_q'] = temp.UNITS.apply(lambda x : m.log(x))
         elastic = pd.DataFrame({'ITEM':i, 'Elasticities':[get_elasticities(temp).coef_.item()], 'Intercept':[get_elasticities(temp).intercept_.item()]})
         all_elastic=pd.concat([all_elastic, elastic])
+        progress = progress + 1
+    my_bar.empty()
     return all_elastic
 
 
