@@ -12,8 +12,6 @@ def get_data(file):
 
 st.set_page_config(
     page_title="Price Optimization App",
-    page_icon=":moneybag:",
-    layout="wide",
     menu_items={
         'About': "# MSDS 498 CAPSTONE PROJECT: Pricing Optimization "
     }
@@ -27,7 +25,7 @@ st.warning("The CSV file must have ITEM, DATE, UNITS, PRICE as column names")
 st.markdown("* ***Demand Forecast Tab***: Uses uploaded weekly historical sales data to create a 4 weeks of demand forecast, taking into account factors such as seasonality and trends")
 st.markdown("* ***Price Elasticities Tab***: Estimates how changes in price will affect demand for a given item")
 st.markdown("* ***Price Simulator Tab***: Simulate 'What-If' price change scenarios impact on demand and budget requirement")
-st.markdown("* ***Price optimization Tab***: Leverage Demand Forecast, Available Budget and Price Elasticities to recommend optimal prices to maximize revenue ")
+st.markdown("* ***Price Optimization Tab***: Leverage Demand Forecast, Available Budget and Price Elasticities to recommend optimal prices to maximize revenue ")
 
 def callback_upl():
     st.session_state['upl'] = True
