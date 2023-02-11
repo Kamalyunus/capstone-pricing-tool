@@ -35,4 +35,4 @@ https://docs.streamlit.io/streamlit-community-cloud/get-started/deploy-an-app
 
 Sample Data is present in folder to get started
 
- [^1]: Note Docker and Git installation are Prerequisite
+ [^1]: Prerequisite: Docker and Git installation 
