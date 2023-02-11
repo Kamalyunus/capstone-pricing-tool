@@ -28,6 +28,11 @@ The CSV file must have following columns (ITEM - DATE are composite primary key 
  ```
  Access app at  http://localhost:8501/ in your browser
 
+## Cloud Deployment
+
+Fork the Github repo above and follow instruction provided at this link:  
+https://docs.streamlit.io/streamlit-community-cloud/get-started/deploy-an-app 
+
 Sample Data is present in folder to get started
 
  [^1]: Note Docker and Git installation are Prerequisite
