@@ -12,10 +12,10 @@ The CSV file must have following columns (ITEM - DATE are composite primary key 
 - PRICE: Selling price of the item (float)
 
 ## App Tab Details:
-- Demand Forecast Tab: Uses uploaded weekly historical sales data to create a 4 weeks of demand forecast, taking into account factors such as seasonality and trends
-- Price Elasticities Tab: Estimates how changes in price will affect demand for a given item
-- Price Simulator Tab: Simulate 'What-If' price change scenarios impact on demand and budget requirement
-- Price Optimization Tab: Leverage Demand Forecast, Available Budget and Price Elasticities to recommend optimal prices to maximize revenue
+- **Demand Forecast Tab**: Uses uploaded weekly historical sales data to create a 4 weeks of demand forecast, taking into account factors such as seasonality and trends
+- **Price Elasticities Tab**: Estimates how changes in price will affect demand for a given item
+- **Price Simulator Tab**: Simulate 'What-If' price change scenarios impact on demand and budget requirement
+- **Price Optimization Tab**: Leverage Demand Forecast, Available Budget and Price Elasticities to recommend optimal prices to maximize revenue
 
 ## Local Installation:
  Run following commands[^1]:
@@ -27,5 +27,7 @@ The CSV file must have following columns (ITEM - DATE are composite primary key 
  docker run -p 8501:8501 -d capstonepricingtool:latest
  ```
  Access app at  http://localhost:8501/ in your browser
+
+Sample Data is present in folder to get started
 
  [^1]: Note Docker and Git installation are Prerequisite
