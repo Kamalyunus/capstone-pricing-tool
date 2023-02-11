@@ -6,10 +6,10 @@
 Upload file having weekly time series data containing item sold quantity and selling price. Any relevant feature can also be included to improve price elasticities and demand forecast prediction
 
 The CSV file must have following columns (ITEM - DATE are composite primary key columns):
-- ITEM: Item description (string) 
-- DATE: Week start/end date (MM/DD/YYYY) 
-- UNITS: Item volume for the week (float) 
-- PRICE: Selling price of the item (float)
+- *ITEM*: Item description (string) 
+- *DATE*: Week start/end date (MM/DD/YYYY) 
+- *UNITS*: Item volume for the week (float) 
+- *PRICE*: Selling price of the item (float)
 
 ## App Tab Details:
 - **Demand Forecast Tab**: Uses uploaded weekly historical sales data to create a 4 weeks of demand forecast, taking into account factors such as seasonality and trends
@@ -28,7 +28,7 @@ The CSV file must have following columns (ITEM - DATE are composite primary key 
  ```
  Access app at  http://localhost:8501/ in your browser
 
-## Cloud Deployment
+## Cloud Deployment:
 
 Fork the Github repo above and follow instruction provided at this link:  
 https://docs.streamlit.io/streamlit-community-cloud/get-started/deploy-an-app 
