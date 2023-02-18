@@ -38,8 +38,8 @@ GCP:
  - Follow instructions provided at this link:<br/>
  https://cloud.google.com/run/docs/continuous-deployment-with-cloud-build 
 
-GCP will deploy app per diagram below: <br/>
-![Architecture](Architecture.drawio.png)
+GCP will deploy app per architecture diagram below: <br/>
+![Architecture1](Architecture.drawio.png)
 
 Sample Data is present in folder to get started
 
