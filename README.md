@@ -30,8 +30,16 @@ The CSV file must have following columns (ITEM - DATE are composite primary key 
 
 ## Cloud Deployment:
 
-Fork the Github repo above and follow instruction provided at this link:  
+Streamlit Cloud:
+- Fork the Github repo above and follow instruction provided at this link: <br/> 
 https://docs.streamlit.io/streamlit-community-cloud/get-started/deploy-an-app 
+
+GCP:
+ - Follow instructions provided at this link:<br/>
+ https://cloud.google.com/run/docs/continuous-deployment-with-cloud-build 
+
+GCP will deploy app per diagram below: <br/>
+![Architecture](Architecture.drawio.png)
 
 Sample Data is present in folder to get started
 
