@@ -44,3 +44,7 @@ GCP will deploy app per architecture diagram below: <br/>
 Sample Data is present in folder to get started
 
  [^1]: Prerequisite: Docker and Git installation 
+ 
+ ## Pricing Tool User Guide
+  - Follow instructions provided at this link:<br/>
+ https://docs.google.com/document/d/1ilAjzA3KHGU7Msj1p2QLS7czVynkxiwFLad2OMlGcRk/edit?usp=sharing
